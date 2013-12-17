@@ -1,0 +1,33 @@
+<%= form_for(@campsite) do |f| %>
+  <% if @campsite.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@campsite.errors.count, "error") %> prohibited this campsite from being saved:</h2>
+
+      <ul>
+      <% @campsite.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :state_id %><br>
+    <%= f.number_field :state_id %>
+  </div>
+  <div class="field">
+    <%= f.label :region_id %><br>
+    <%= f.number_field :region_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
