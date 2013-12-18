@@ -1,5 +1,7 @@
 Scaffold::Application.routes.draw do
-  get '/states/:id', to: 'states#show', as: 'state'
+  get '/:state_slug/', to: 'states#show'
+  get '/:state_slug/:region_slug', to: 'regions#show'
+  root 'states#index'
   resources :campsites 
 
   resources :regions

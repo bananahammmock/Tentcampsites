@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
-
+<p>
+  <strong>State:</strong>
+  <%= @region.state.name %>
+</p>
 <p>
   <strong>Name:</strong>
   <%= @region.name %>
@@ -14,6 +17,4 @@
   <strong>State:</strong>
   <%= @region.state_id %>
 </p>
-
-<%= link_to 'Edit', edit_region_path(@region) %> |
-<%= link_to 'Back', regions_path %>
+<%= link_to 'Back', "/#{@region.state.slug}" %>

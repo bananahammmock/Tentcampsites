@@ -9,6 +9,12 @@
   <strong>Description:</strong>
   <%= @state.description %>
 </p>
+<strong>Regions</strong>
+</br>
+<% @state.regions.each do |r| %>
+  <% gotohere = "#{@state.slug}/#{r.slug}" %>
+  <%= link_to r.name, gotohere %></br>
+<% end %>
 
-<%= link_to 'Edit', edit_state_path(@state) %> |
-<%= link_to 'Back', states_path %>
+ |
+<%= link_to 'home', "/" %> |

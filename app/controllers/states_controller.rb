@@ -1,5 +1,5 @@
 class StatesController < ApplicationController
-  before_action :set_state, only: [:show, :edit, :update, :destroy]
+  #before_action :set_state, only: [:show, :edit, :update, :destroy]
 
   # GET /states
   # GET /states.json
@@ -10,6 +10,7 @@ class StatesController < ApplicationController
   # GET /states/1
   # GET /states/1.json
   def show
+    @state = State.find_by_slug(params[:state_slug])
   end
 
   # GET /states/new
@@ -63,12 +64,12 @@ class StatesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_state
-      @state = State.find(params[:id])
-    end
+#    def set_state
+ #     @state = State.find(params[:id])
+  #  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def state_params
-      params.require(:state).permit(:name, :description)
-    end
+   # def state_params
+    #  params.require(:state).permit(:name, :description)
+    #end
 end

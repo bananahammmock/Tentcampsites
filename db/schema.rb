@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217155816) do
+ActiveRecord::Schema.define(version: 20131217215048) do
 
   create_table "campsites", force: true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20131217155816) do
     t.integer  "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   create_table "states", force: true do |t|
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 20131217155816) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
 end

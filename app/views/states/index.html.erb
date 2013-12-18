@@ -14,11 +14,9 @@
   <tbody>
     <% @states.each do |state| %>
       <tr>
-        <td><%= link_to "#{state.name}", state %></td>
+        <td><%= link_to "#{state.name}", "/#{state.slug}" %></td>
         <td><%= state.description %></td>
-        <td><%= link_to 'Show', state %></td>
-        <td><%= link_to 'Edit', edit_state_path(state) %></td>
-        <td><%= link_to 'Destroy', state, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', "/#{state.slug}" %></td>
       </tr>
     <% end %>
   </tbody>
