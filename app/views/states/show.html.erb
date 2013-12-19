@@ -12,7 +12,7 @@
 <strong>Regions</strong>
 </br>
 <% @state.regions.each do |r| %>
-  <% gotohere = "#{@state.slug}/#{r.slug}" %>
+  <% gotohere = "/#{@state.slug}/#{r.slug}" %>
   <%= link_to r.name, gotohere %></br>
 <% end %>
 

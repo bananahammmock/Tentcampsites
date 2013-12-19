@@ -63,6 +63,11 @@ class StatesController < ApplicationController
   end
 
   private
+
+  def state_params
+    params.require(:state).permit(:name, :description)
+    
+  end
     # Use callbacks to share common setup or constraints between actions.
 #    def set_state
  #     @state = State.find(params[:id])

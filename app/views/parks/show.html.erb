@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>State:</strong>
+  <%= @park.region.state.name %>
+</p>
+<p>
+  <strong>Region:</strong>
+  <%= @park.region.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @park.description %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @park.region.state_id %>
+
+
+</p>
+<p>
+  <strong>Campsites</strong>
+  <% @park.region.campsites.each do |campsite| %>
+  	<%= link_to "#{campsite.name}", "/#{@park.region.state.slug}/#{@park.region.slug}/park/#{@park.slug}/#{campsite.slug}"  %>
+  <% end %>
+  
+</p>
+<%= link_to 'Back', "/#{@park.region.state.slug}" %>

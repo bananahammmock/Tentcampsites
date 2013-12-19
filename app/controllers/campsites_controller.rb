@@ -10,6 +10,7 @@ class CampsitesController < ApplicationController
   # GET /campsites/1
   # GET /campsites/1.json
   def show
+    @campsite = Campsite.find_by_slug(params[:campsite_slug])
   end
 
   # GET /campsites/new
@@ -64,7 +65,7 @@ class CampsitesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_campsite
-      @campsite = Campsite.find(params[:id])
+      @campsite = Campsite.find_by_slug(params[:campsite_slug])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

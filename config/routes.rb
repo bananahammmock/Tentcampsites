@@ -1,6 +1,9 @@
 Scaffold::Application.routes.draw do
   get '/:state_slug/', to: 'states#show'
   get '/:state_slug/:region_slug', to: 'regions#show'
+  get '/:state_slug/:region_slug/park/:park_slug', to: 'parks#show'
+  get '/:state_slug/:region_slug/:campsite_slug', to: 'campsites#show'
+  get '/:state_slug/:region_slug/park/:park_slug/:campsite_slug', to: 'campsites#show'
   root 'states#index'
   resources :campsites 
 

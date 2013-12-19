@@ -16,5 +16,21 @@
 <p>
   <strong>State:</strong>
   <%= @region.state_id %>
+
+
+</p>
+<p>
+  <strong>Parks</strong>
+  <% @region.parks.each do |park| %>
+  	<%= link_to "#{park.name}", "/#{@region.state.slug}/#{@region.slug}/park/#{park.slug}" %>
+  <% end %>
+  
+</p>
+<p>
+  <strong>Campsites</strong>
+  <% @region.campsites.each do |campsite| %>
+  	<%= link_to "#{campsite.name}", "/#{@region.state.slug}/#{@region.slug}/#{campsite.slug}"  %>
+  <% end %>
+  
 </p>
 <%= link_to 'Back', "/#{@region.state.slug}" %>

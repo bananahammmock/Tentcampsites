@@ -6,8 +6,8 @@
       <th>Name</th>
       <th>Description</th>
       <th>State</th>
-      <th></th>
-      <th></th>
+      <th>Parks</th>
+      <th>Campsites</th>
       <th></th>
     </tr>
   </thead>
@@ -15,9 +15,15 @@
   <tbody>
     <% @regions.each do |region| %>
       <tr>
-        <td><%= link_to "#{region.name}", region %></td>
+        <td><%= link_to "#{region.name}", "/#{region.state.slug}/#{region.slug}" %></td>
         <td><%= region.description %></td>
         <td><%= region.state_id %></td>
+        <td><% region.parks.each do |park| %>
+              <%= park.name %>
+                <% end %> %></td>
+        <td><% region.campsites.each do |campsite| %>
+              <%= campsite.name %>
+                <% end %> %></td>
         <td><%= link_to 'Show', region %></td>
         
       </tr>

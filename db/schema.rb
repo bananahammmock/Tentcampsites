@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218074900) do
+ActiveRecord::Schema.define(version: 20131219055328) do
 
   create_table "campsites", force: true do |t|
     t.string   "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20131218074900) do
     t.integer  "region_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "park_id"
+    t.string   "slug"
   end
 
   create_table "parks", force: true do |t|
@@ -28,6 +30,7 @@ ActiveRecord::Schema.define(version: 20131218074900) do
     t.integer  "region_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   create_table "regions", force: true do |t|
