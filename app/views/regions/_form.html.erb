@@ -20,9 +20,13 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :state_id %><br>
-    <%= f.number_field :state_id %>
+    <%= f.label :slug %><br>
+    <%= f.text_field :slug %>
   </div>
+  <div class="field">
+    <%= f.hidden_field :state_id, :value => @state_id %><br>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

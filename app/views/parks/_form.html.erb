@@ -1,10 +1,10 @@
-<%= form_for(@campsite) do |f| %>
-  <% if @campsite.errors.any? %>
+<%= form_for(@park) do |f| %>
+  <% if @park.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@campsite.errors.count, "error") %> prohibited this campsite from being saved:</h2>
+      <h2><%= pluralize(@park.errors.count, "error") %> prohibited this park from being saved:</h2>
 
       <ul>
-      <% @campsite.errors.full_messages.each do |msg| %>
+      <% @park.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -20,12 +20,9 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.hidden_field :park_id, :value => @park_id %><br>
-  </div>
-  <div class="field">
     <%= f.hidden_field :region_id, :value => @region_id %><br>
   </div>
-   <div class="field">
+  <div class="field">
     <%= f.label :slug %><br>
     <%= f.text_field :slug %>
   </div>

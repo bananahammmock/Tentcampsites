@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 <p>
+  <strong>Park:</strong>
+  <%= @park.name %>
+</p>
+<p>
   <strong>State:</strong>
   <%= @park.region.state.name %>
 </p>
@@ -15,15 +19,16 @@
 
 <p>
   <strong>State:</strong>
-  <%= @park.region.state_id %>
+  <%= @park.region.name %>
 
 
 </p>
 <p>
   <strong>Campsites</strong>
-  <% @park.region.campsites.each do |campsite| %>
+  <% @park.campsites.each do |campsite| %>
   	<%= link_to "#{campsite.name}", "/#{@park.region.state.slug}/#{@park.region.slug}/park/#{@park.slug}/#{campsite.slug}"  %>
   <% end %>
-  
+<p>
+<%= link_to 'New Campsite', "#{new_campsite_path}?region=#{params[:region_slug]}&park=#{params[:park_slug]}" %>
 </p>
 <%= link_to 'Back', "/#{@park.region.state.slug}" %>

@@ -17,6 +17,7 @@ class RegionsController < ApplicationController
   # GET /regions/new
   def new
     @region = Region.new
+    @state_id = State.find_by_slug(params[:state]).id
   end
 
   # GET /regions/1/edit
@@ -27,16 +28,20 @@ class RegionsController < ApplicationController
   # POST /regions.json
   def create
     @region = Region.new(region_params)
-
-    respond_to do |format|
-      if @region.save
-        format.html { redirect_to @region, notice: 'Region was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @region }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @region.errors, status: :unprocessable_entity }
-      end
+    if @region.save
+      redirect_to "/#{@region.state.slug}"
+    else
+      render :new
     end
+    # respond_to do |format|
+    #   if @region.save
+    #     format.html { redirect_to @region, notice: 'Region was successfully created.' }
+    #     format.json { render action: 'show', status: :created, location: @region }
+    #   else
+    #     format.html { render action: 'new' }
+    #     format.json { render json: @region.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /regions/1
@@ -71,6 +76,6 @@ class RegionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def region_params
-      params.require(:region).permit(:name, :description, :state_id)
+      params.require(:region).permit(:name, :description, :state_id, :slug)
     end
 end

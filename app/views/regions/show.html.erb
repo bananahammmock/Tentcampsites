@@ -33,4 +33,10 @@
   <% end %>
   
 </p>
+<p>
+<%= link_to 'New Park', "#{new_park_path}?region=#{params[:region_slug]}" %>
+<p>
+<%= link_to 'New Campsite', "#{new_campsite_path}?region=#{params[:region_slug]}" %>
+<p>
 <%= link_to 'Back', "/#{@region.state.slug}" %>
+

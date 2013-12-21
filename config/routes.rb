@@ -1,15 +1,17 @@
 Scaffold::Application.routes.draw do
+  resources :states 
+  resources :regions
+  resources :parks
+  resources :campsites 
+
+  
   get '/:state_slug/', to: 'states#show'
   get '/:state_slug/:region_slug', to: 'regions#show'
   get '/:state_slug/:region_slug/park/:park_slug', to: 'parks#show'
   get '/:state_slug/:region_slug/:campsite_slug', to: 'campsites#show'
   get '/:state_slug/:region_slug/park/:park_slug/:campsite_slug', to: 'campsites#show'
   root 'states#index'
-  resources :campsites 
-
-  resources :regions
-
-  resources :states 
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

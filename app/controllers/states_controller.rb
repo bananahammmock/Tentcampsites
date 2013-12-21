@@ -27,19 +27,23 @@ class StatesController < ApplicationController
   def create
     @state = State.new(state_params)
 
-    respond_to do |format|
-      if @state.save
-        format.html { redirect_to @state, notice: 'State was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @state }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @state.errors, status: :unprocessable_entity }
-      end
+    if @state.save
+      redirect_to root_path
+    else
+      render :new
     end
+    #  respond_to do |format|
+    #   if @state.save
+    #     format.html { redirect_to @state, notice: 'State was successfully created.' }
+    #     format.json { render action: 'show', status: :created, location: @state }
+    #   else
+    #     format.html { render action: 'new' }
+    #     format.json { render json: @state.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
-  # PATCH/PUT /states/1
-  # PATCH/PUT /states/1.json
+  
   def update
     respond_to do |format|
       if @state.update(state_params)

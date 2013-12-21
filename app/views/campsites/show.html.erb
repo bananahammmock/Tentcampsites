@@ -10,14 +10,10 @@
   <%= @campsite.description %>
 </p>
 
-<p>
-  <strong>State:</strong>
-  <%= @campsite.state_id %>
-</p>
 
 <p>
   <strong>Region:</strong>
-  <%= @campsite.region_id %>
+  <%= @campsite.region.name%>
 </p>
 
 <%= link_to 'Edit', edit_campsite_path(@campsite) %> |
