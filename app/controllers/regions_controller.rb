@@ -27,20 +27,6 @@ class RegionsController < ApplicationController
     @region = Region.find(params[:id])
   end
 
-  # POST /regions
-  # POST /regions.json
-  def create
-    @region = Region.new(region_params)
-    if current_user.email == "bananahammock2@gmail.com"
-      if @region.save
-        redirect_to "/#{@region.state.slug}"
-      end
-    else
-      redirect_to root_path
-      flash[:alert] = "You are not authorized to do that, BRO."
-    end
-  end
-
   # PATCH/PUT /regions/1
   # PATCH/PUT /regions/1.json
   def update
@@ -52,6 +38,22 @@ class RegionsController < ApplicationController
     end
 
   end
+
+
+  # POST /regions
+  # POST /regions.json
+  def create
+    @region = Region.new(region_params)
+    if "a" == "a"
+      if @region.save
+        redirect_to "/#{@region.state.slug}"
+      end
+    else
+      redirect_to root_path
+      flash[:alert] = "You are not authorized to do that, BRO."
+    end
+  end
+
 
   # DELETE /regions/1
   # DELETE /regions/1.json

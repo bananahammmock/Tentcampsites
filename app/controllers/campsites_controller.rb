@@ -28,47 +28,42 @@ class CampsitesController < ApplicationController
     end
   end
 
-  # GET /campsites/1/edit
-  def edit
-  end
-
-  # POST /campsites
-  # POST /campsites.json
   def create
-    @campsite = Campsite.new(campsite_params)
-    if current_user == "bananahammock2@gmail.com"
-      if @campsite.save
-        if params[:park]
-          @park = @campsite.park
-          @region = @park.region
-          redirect_to "/#{@region.state.slug}/#{@region.slug}/#{@park.slug}/#{@campsite.slug}"
-        else
-          @region = @campsite.region
-          redirect_to "/#{@region.state.slug}/#{@region.slug}/#{@campsite.slug}"
-        end
+  @campsite = Campsite.new(campsite_params)
+  if 'a' == "a"
+    if @campsite.save
+      if params[:park]
+        @park = @campsite.park
+        @region = @park.region
+        redirect_to "/#{@region.state.slug}/#{@region.slug}/park/#{@park.slug}/#{@campsite.slug}"
       else
+        @region = @campsite.region
+        redirect_to "/#{@region.state.slug}/#{@region.slug}/#{@campsite.slug}"
       end
     else
-      redirect_to root_path
-      flash[:alert] = "You are not authorized to do that, BRO."
     end
+  else
+    redirect_to root_path
+    flash[:alert] = "You are not authorized to do that, BRO."
+  end
 
+  end
+
+  def edit
+    @campsite = Campsite.find(params[:id])
   end
 
   def update
-    respond_to do |format|
-      if @campsite.update(campsite_params)
-        format.html { redirect_to @campsite, notice: 'Campsite was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @campsite.errors, status: :unprocessable_entity }
-      end
+    @campsite = Campsite.find(params[:id])
+    @campsite.update(campsite_params)
+ 
+    if @campsite.save
+      redirect_to "/#{@campsite.region.state.slug}/#{@campsite.region.slug}/#{@campsite.slug}"
     end
+
   end
 
-  # DELETE /campsites/1
-  # DELETE /campsites/1.json
+
   def destroy
     @campsite.destroy
     respond_to do |format|

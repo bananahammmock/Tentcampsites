@@ -10,12 +10,24 @@
   <%= @campsite.description %>
 </p>
 
+<% if @campsite.park %>
+  <p>
+    <strong>Park</strong>
+    <%= @campsite.park.name %>
+  </p>
+<% end %>
+
 
 <p>
   <strong>Region:</strong>
   <%= @campsite.region.name%>
 </p>
-<% if current_user.email = "bananahammock2@gmail.com" %>
+
+<% if 'a' == 'a' %>
 	<%= link_to 'Edit', edit_campsite_path(@campsite) %> |
-	<%= link_to 'Back', campsites_path %>
+	<% if @campsite.park_id %>
+    <%= link_to 'Back', "/#{@campsite.park.region.state.slug}/#{@campsite.park.region.slug}/park/#{@campsite.park.slug}" %>
+  <% else %>
+    <%= link_to 'Back', "/#{@campsite.region.state.slug}/#{@campsite.region.slug}" %>
+  <% end %>
 <% end %>
