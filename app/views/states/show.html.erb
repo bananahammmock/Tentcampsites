@@ -19,5 +19,7 @@
  |
 <%= link_to 'home', "/" %> |
 <p>
-<%= link_to 'New Region', "#{new_region_path}?state=#{params[:state_slug]}" %>
-
+<% if current_user %>
+	<%= link_to 'Edit', edit_state_path(@state) %>
+	<%= link_to 'New Region', "#{new_region_path}?state=#{params[:state_slug]}" %>
+<% end %>

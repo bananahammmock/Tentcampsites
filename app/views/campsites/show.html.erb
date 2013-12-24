@@ -15,6 +15,7 @@
   <strong>Region:</strong>
   <%= @campsite.region.name%>
 </p>
-
-<%= link_to 'Edit', edit_campsite_path(@campsite) %> |
-<%= link_to 'Back', campsites_path %>
+<% if current_user.email = "bananahammock2@gmail.com" %>
+	<%= link_to 'Edit', edit_campsite_path(@campsite) %> |
+	<%= link_to 'Back', campsites_path %>
+<% end %>

@@ -34,9 +34,11 @@
   
 </p>
 <p>
+<% if current_user.email = "bananahammock2@gmail.com" %>
 <%= link_to 'New Park', "#{new_park_path}?region=#{params[:region_slug]}" %>
 <p>
 <%= link_to 'New Campsite', "#{new_campsite_path}?region=#{params[:region_slug]}" %>
 <p>
+<% end %>
 <%= link_to 'Back', "/#{@region.state.slug}" %>
 

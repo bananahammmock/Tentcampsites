@@ -1,10 +1,15 @@
 Scaffold::Application.routes.draw do
+  get 'auth/:provider/callback', to: 'sessions#create', as: 'signin'
+  get 'auth/failure', to: redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
   resources :states 
   resources :regions
   resources :parks
   resources :campsites 
 
-  
+  get '/blargh', to: 'states#blargh'
+  get '/state/:state_slug/edit', to: 'states#update'
+  post '/states/:state_slug/edit', to: 'states#update'
   get '/:state_slug/', to: 'states#show'
   get '/:state_slug/:region_slug', to: 'regions#show'
   get '/:state_slug/:region_slug/park/:park_slug', to: 'parks#show'

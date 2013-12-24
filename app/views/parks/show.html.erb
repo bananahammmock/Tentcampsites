@@ -29,6 +29,8 @@
   	<%= link_to "#{campsite.name}", "/#{@park.region.state.slug}/#{@park.region.slug}/park/#{@park.slug}/#{campsite.slug}"  %>
   <% end %>
 <p>
+<% if current_user.email = "bananahammock2@gmail.com" %>
 <%= link_to 'New Campsite', "#{new_campsite_path}?region=#{params[:region_slug]}&park=#{params[:park_slug]}" %>
+<% end %>
 </p>
 <%= link_to 'Back', "/#{@park.region.state.slug}" %>

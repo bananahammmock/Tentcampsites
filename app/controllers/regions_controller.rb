@@ -1,4 +1,6 @@
 class RegionsController < ApplicationController
+  before_action :require_login, only: [:new]
+  # skip_before_action :require_login, only: [:show]
  # before_action :set_region, only: [:show, :edit, :update, :destroy]
 
   # GET /regions
@@ -28,11 +30,12 @@ class RegionsController < ApplicationController
   # POST /regions.json
   def create
     @region = Region.new(region_params)
-    if @region.save
-      redirect_to "/#{@region.state.slug}"
-    else
-      render :new
-    end
+    if current_user.email == "bananahammock2@gmail.com"
+      if @region.save
+        redirect_to "/#{@region.state.slug}"
+      else
+        render :new
+      end
     # respond_to do |format|
     #   if @region.save
     #     format.html { redirect_to @region, notice: 'Region was successfully created.' }
@@ -42,6 +45,10 @@ class RegionsController < ApplicationController
     #     format.json { render json: @region.errors, status: :unprocessable_entity }
     #   end
     # end
+    else
+      redirect_to root_path
+      flash[:alert] = "You are not authorized to do that, BRO."
+    end
   end
 
   # PATCH/PUT /regions/1

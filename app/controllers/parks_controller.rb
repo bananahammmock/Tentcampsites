@@ -1,4 +1,6 @@
 class ParksController < ApplicationController
+	before_action :require_login, only: [:new]
+	# skip_before_action :require_login, only: [:show]
 	def show
 		@park = Park.find_by_slug(params[:park_slug])
 		
@@ -10,11 +12,16 @@ class ParksController < ApplicationController
 	end
 	def create
     @park = Park.new(park_params)
-    if @park.save
-    	@region = @park.region
-      redirect_to "/#{@region.state.slug}/#{@park.region.slug}"
-    else
-      render :new
+    if current_user == "bananahammock2@gmail.com"
+	    if @park.save
+	    	@region = @park.region
+	      redirect_to "/#{@region.state.slug}/#{@park.region.slug}"
+	    else
+	      render :new
+	    end
+	  else
+	  	redirect_to root_path
+      flash[:alert] = "You are not authorized to do that, BRO."
     end
   end
 private

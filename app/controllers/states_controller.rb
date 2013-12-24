@@ -1,6 +1,6 @@
 class StatesController < ApplicationController
-  #before_action :set_state, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_login, only: [:new]
+  # skip_before_action :require_login, only: [:show]
   # GET /states
   # GET /states.json
   def index
@@ -18,46 +18,33 @@ class StatesController < ApplicationController
     @state = State.new
   end
 
-  # GET /states/1/edit
-  def edit
+ 
+  def blargh
   end
 
-  # POST /states
-  # POST /states.json
+
   def create
     @state = State.new(state_params)
-
-    if @state.save
-      redirect_to root_path
+    if current_user.email == "bananahammock2@gmail.com"
+      if @state.save
+        redirect_to root_path
+      else
+        render :new
+      end
     else
-      render :new
+      redirect_to root_path
+      flash[:alert] = "You are not authorized to do that, BRO."
     end
-    #  respond_to do |format|
-    #   if @state.save
-    #     format.html { redirect_to @state, notice: 'State was successfully created.' }
-    #     format.json { render action: 'show', status: :created, location: @state }
-    #   else
-    #     format.html { render action: 'new' }
-    #     format.json { render json: @state.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   
   def update
-    respond_to do |format|
-      if @state.update(state_params)
-        format.html { redirect_to @state, notice: 'State was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @state.errors, status: :unprocessable_entity }
-      end
-    end
+    @state = State.find_by_slug(:state_slug)
+    @state.update(state_params)
+    @state.save!
   end
 
-  # DELETE /states/1
-  # DELETE /states/1.json
+ 
   def destroy
     @state.destroy
     respond_to do |format|
@@ -67,10 +54,8 @@ class StatesController < ApplicationController
   end
 
   private
-
   def state_params
-    params.require(:state).permit(:name, :description)
-    
+    params.require(:state).permit(:name, :description, :slug)
   end
     # Use callbacks to share common setup or constraints between actions.
 #    def set_state

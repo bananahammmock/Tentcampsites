@@ -1,5 +1,6 @@
 class CampsitesController < ApplicationController
-  before_action :set_campsite, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:new]
+  # skip_before_action :require_login, only: [:show]
 
   # GET /campsites
   # GET /campsites.json
@@ -35,32 +36,25 @@ class CampsitesController < ApplicationController
   # POST /campsites.json
   def create
     @campsite = Campsite.new(campsite_params)
-
-    if @campsite.save
-      if params[:park]
-        @park = @campsite.park
-        @region = @park.region
-      redirect_to "/#{@region.state.slug}/#{@region.slug}/#{@park.slug}/#{@campsite.slug}"
+    if current_user == "bananahammock2@gmail.com"
+      if @campsite.save
+        if params[:park]
+          @park = @campsite.park
+          @region = @park.region
+          redirect_to "/#{@region.state.slug}/#{@region.slug}/#{@park.slug}/#{@campsite.slug}"
+        else
+          @region = @campsite.region
+          redirect_to "/#{@region.state.slug}/#{@region.slug}/#{@campsite.slug}"
+        end
       else
-        @region = @campsite.region
-        redirect_to "/#{@region.state.slug}/#{@region.slug}/#{@campsite.slug}"
-       end
+      end
     else
+      redirect_to root_path
+      flash[:alert] = "You are not authorized to do that, BRO."
     end
 
-    # respond_to do |format|
-    #   if @campsite.save
-    #     format.html { redirect_to @campsite, notice: 'Campsite was successfully created.' }
-    #     format.json { render action: 'show', status: :created, location: @campsite }
-    #   else
-    #     format.html { render action: 'new' }
-    #     format.json { render json: @campsite.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
-  # PATCH/PUT /campsites/1
-  # PATCH/PUT /campsites/1.json
   def update
     respond_to do |format|
       if @campsite.update(campsite_params)
