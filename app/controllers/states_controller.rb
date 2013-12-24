@@ -18,6 +18,9 @@ class StatesController < ApplicationController
     @state = State.new
   end
 
+  def edit
+   @state = State.find(params[:id])
+  end
  
   def blargh
   end
@@ -39,9 +42,11 @@ class StatesController < ApplicationController
 
   
   def update
-    @state = State.find_by_slug(:state_slug)
+    @state = State.find(params[:id])
     @state.update(state_params)
-    @state.save!
+    if @state.save
+      redirect_to "/#{@state.slug}/"
+    end
   end
 
  

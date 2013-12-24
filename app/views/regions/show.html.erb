@@ -1,8 +1,5 @@
 <p id="notice"><%= notice %></p>
-<p>
-  <strong>State:</strong>
-  <%= @region.state.name %>
-</p>
+
 <p>
   <strong>Region:</strong>
   <%= @region.name %>
@@ -15,7 +12,7 @@
 
 <p>
   <strong>State:</strong>
-  <%= @region.state_id %>
+  <%= link_to "#{@region.state.name}", "/#{@region.state.slug}" %>
 
 
 </p>
@@ -35,6 +32,7 @@
 </p>
 <p>
 <% if current_user.email = "bananahammock2@gmail.com" %>
+<%= link_to 'Edit', edit_region_path(@region) %>
 <%= link_to 'New Park', "#{new_park_path}?region=#{params[:region_slug]}" %>
 <p>
 <%= link_to 'New Campsite', "#{new_campsite_path}?region=#{params[:region_slug]}" %>

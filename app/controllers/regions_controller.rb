@@ -24,6 +24,7 @@ class RegionsController < ApplicationController
 
   # GET /regions/1/edit
   def edit
+    @region = Region.find(params[:id])
   end
 
   # POST /regions
@@ -33,18 +34,7 @@ class RegionsController < ApplicationController
     if current_user.email == "bananahammock2@gmail.com"
       if @region.save
         redirect_to "/#{@region.state.slug}"
-      else
-        render :new
       end
-    # respond_to do |format|
-    #   if @region.save
-    #     format.html { redirect_to @region, notice: 'Region was successfully created.' }
-    #     format.json { render action: 'show', status: :created, location: @region }
-    #   else
-    #     format.html { render action: 'new' }
-    #     format.json { render json: @region.errors, status: :unprocessable_entity }
-    #   end
-    # end
     else
       redirect_to root_path
       flash[:alert] = "You are not authorized to do that, BRO."
@@ -54,15 +44,13 @@ class RegionsController < ApplicationController
   # PATCH/PUT /regions/1
   # PATCH/PUT /regions/1.json
   def update
-    respond_to do |format|
-      if @region.update(region_params)
-        format.html { redirect_to @region, notice: 'Region was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @region.errors, status: :unprocessable_entity }
-      end
+    @region = Region.find(params[:id])
+    @region.update(region_params)
+ 
+    if @region.save
+      redirect_to "/#{@region.state.slug}/#{@region.slug}"
     end
+
   end
 
   # DELETE /regions/1

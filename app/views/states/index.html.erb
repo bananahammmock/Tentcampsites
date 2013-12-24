@@ -24,6 +24,8 @@
 </table>
 
 <br>
-<% if current_user.email = "bananahammock2@gmail.com" %>
-<%= link_to 'New State', new_state_path(@state) %>
+<% if current_user %>
+  <% if current_user.email = "bananahammock2@gmail.com" %>
+    <%= link_to 'New State', new_state_path(@state) %>
+  <% end %>
 <% end %>
